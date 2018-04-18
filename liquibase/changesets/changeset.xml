@@ -1,0 +1,180 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+	<changeSet author="guillermo.segura" id="001">
+		<createTable tableName="C_TIPO_AERONAVE">
+            <column autoIncrement="false" name="ID_TIPO_AERONAVE" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_C_TIPO_AERONAVE"/>
+            </column>
+			<column name="DS_NOMBRE" type="nvarchar(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DS_CODIGO" type="nvarchar(5)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createTable tableName="C_AEROLINEA">
+            <column autoIncrement="false" name="ID_AEROLINEA" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_C_AEROLINEA"/>
+            </column>
+			<column name="DS_NOMBRE" type="nvarchar(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DS_CODIGO" type="nvarchar(2)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createTable tableName="K_AERONAVE">
+            <column autoIncrement="true" name="ID_AERONAVE" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_K_AERONAVE"/>
+            </column>
+			<column name="ID_AEROLINEA" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ID_TIPO_AERONAVE" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DS_MATRICULA" type="nvarchar(10)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<addForeignKeyConstraint 
+			baseColumnNames="ID_AEROLINEA" 
+			baseTableName="K_AERONAVE" 
+			constraintName="FK_K_AERONAVE_C_AEROLINEA" 
+			deferrable="false" 
+			initiallyDeferred="false" 
+			onDelete="NO ACTION" 
+			onUpdate="NO ACTION" 
+			referencedColumnNames="ID_AEROLINEA" 
+			referencedTableName="C_AEROLINEA"/>
+		<addForeignKeyConstraint 
+			baseColumnNames="ID_TIPO_AERONAVE" 
+			baseTableName="K_AERONAVE" 
+			constraintName="FK_K_AERONAVE_C_TIPO_AERONAVE" 
+			deferrable="false" 
+			initiallyDeferred="false" 
+			onDelete="NO ACTION" 
+			onUpdate="NO ACTION" 
+			referencedColumnNames="ID_TIPO_AERONAVE" 
+			referencedTableName="C_TIPO_AERONAVE"/>
+			
+		<createTable tableName="C_PAIS">
+            <column autoIncrement="false" name="ID_PAIS" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_C_PAIS"/>
+            </column>
+			<column name="DS_NOMBRE" type="nvarchar(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DS_CODIGO" type="nvarchar(2)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createTable tableName="C_ESTACION">
+            <column autoIncrement="false" name="ID_ESTACION" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_C_ESTACION"/>
+            </column>
+			<column name="ID_PAIS" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DS_NOMBRE" type="nvarchar(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DS_CODIGO" type="nvarchar(2)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<addForeignKeyConstraint 
+			baseColumnNames="ID_PAIS" 
+			baseTableName="C_ESTACION" 
+			constraintName="FK_C_ESTACION_C_PAIS" 
+			deferrable="false" 
+			initiallyDeferred="false" 
+			onDelete="NO ACTION" 
+			onUpdate="NO ACTION" 
+			referencedColumnNames="ID_PAIS" 
+			referencedTableName="C_PAIS"/>
+		<createTable tableName="K_RUTA">
+            <column autoIncrement="true" name="ID_RUTA" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_K_RUTA"/>
+            </column>
+			<column name="ID_ESTACION_DEP" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ID_ESTACION_ARR" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DS_CODE" type="nvarchar(6)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<addForeignKeyConstraint 
+			baseColumnNames="ID_ESTACION_DEP" 
+			baseTableName="K_RUTA" 
+			constraintName="FK_K_RUTA_C_ESTACION_DEP" 
+			deferrable="false" 
+			initiallyDeferred="false" 
+			onDelete="NO ACTION" 
+			onUpdate="NO ACTION" 
+			referencedColumnNames="ID_ESTACION" 
+			referencedTableName="C_ESTACION"/>
+		<addForeignKeyConstraint 
+			baseColumnNames="ID_ESTACION_ARR" 
+			baseTableName="K_RUTA" 
+			constraintName="FK_K_RUTA_C_ESTACION_ARR" 
+			deferrable="false" 
+			initiallyDeferred="false" 
+			onDelete="NO ACTION" 
+			onUpdate="NO ACTION" 
+			referencedColumnNames="ID_ESTACION" 
+			referencedTableName="C_ESTACION"/>
+		<createTable tableName="K_VUELO">
+            <column autoIncrement="true" name="ID_VUELO" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_K_VUELO"/>
+            </column>
+			<column name="ID_AERONAVE" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ID_RUTA" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="QT_VUELO" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DT_SCH_DEPARTURE_UTC" type="datetime"/>
+			<column name="DT_ACT_DEPARTURE_UTC" type="datetime"/>
+			<column name="DT_SCH_ARRIVE_UTC" type="datetime"/>
+			<column name="DT_ACT_ARRIVE_UTC" type="datetime"/>
+			<column name="QT_TIME_DELAY_DEP" type="int" defaultValue="0">
+				<constraints nullable="false"/>
+			</column>
+			<column name="QT_TIME_DELAY_ARR" type="int" defaultValue="0">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>	
+		<addForeignKeyConstraint 
+			baseColumnNames="ID_AERONAVE" 
+			baseTableName="K_VUELO" 
+			constraintName="FK_K_VUELO_K_AERONAVE" 
+			deferrable="false" 
+			initiallyDeferred="false" 
+			onDelete="NO ACTION" 
+			onUpdate="NO ACTION" 
+			referencedColumnNames="ID_AERONAVE" 
+			referencedTableName="K_AERONAVE"/>
+		<addForeignKeyConstraint 
+			baseColumnNames="ID_RUTA" 
+			baseTableName="K_VUELO" 
+			constraintName="FK_K_VUELO_K_RUTA" 
+			deferrable="false" 
+			initiallyDeferred="false" 
+			onDelete="NO ACTION" 
+			onUpdate="NO ACTION" 
+			referencedColumnNames="ID_RUTA" 
+			referencedTableName="K_RUTA"/>
+	</changeSet>
+	<changeSet author="guillermo.segura" id="002" >
+		<modifyDataType columnName="DS_CODIGO"
+            newDataType="nvarchar(3)"
+            tableName="C_ESTACION"/>
+	</changeSet>
+</databaseChangeLog>
