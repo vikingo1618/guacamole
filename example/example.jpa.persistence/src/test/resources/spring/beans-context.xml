@@ -9,6 +9,6 @@
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 
-  <bean id="airlineDAO" class="com.axity.example.jpa.persistence.dao.impl.AirlineDAOImpl" />
+  <bean id="carrierDAO" class="com.axity.example.jpa.persistence.dao.impl.CarrierDAOImpl" />
 
 </beans>          

@@ -2,7 +2,7 @@ package com.axity.example.jpa.persistence.dao;
 
 import java.util.List;
 
-import com.axity.example.jpa.model.AirlineDO;
+import com.axity.example.jpa.model.CarrierDO;
 import com.axity.example.jpa.persistence.base.GenericDAO;
 
 /**
@@ -10,7 +10,7 @@ import com.axity.example.jpa.persistence.base.GenericDAO;
  * 
  * @author gsegura
  */
-public interface AirlineDAO extends GenericDAO<AirlineDO>
+public interface CarrierDAO extends GenericDAO<CarrierDO>
 {
 
   /**
@@ -19,7 +19,7 @@ public interface AirlineDAO extends GenericDAO<AirlineDO>
    * @param code
    * @return
    */
-  List<AirlineDO> findByCode( String code );
+  List<CarrierDO> findByCode( String code );
 
   /**
    * Busca los registros por el nombre
@@ -27,5 +27,5 @@ public interface AirlineDAO extends GenericDAO<AirlineDO>
    * @param name
    * @return
    */
-  List<AirlineDO> findByName( String name );
+  List<CarrierDO> findByName( String name );
 }

@@ -13,45 +13,45 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.axity.example.jpa.model.AirlineDO;
+import com.axity.example.jpa.model.CarrierDO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/initial-test-context.xml" })
 @Transactional
-public class AirlineDAOTest
+public class CarrierDAOTest
 {
-  private static final Logger LOGGER = Logger.getLogger( AirlineDAOTest.class );
+  private static final Logger LOGGER = Logger.getLogger( CarrierDAOTest.class );
 
   @Autowired
-  private AirlineDAO airlineDAO;
+  private CarrierDAO carrierDAO;
 
   @Test
   public void testFindByCode()
   {
-    List<AirlineDO> airlines = this.airlineDAO.findByCode( "AV" );
+    List<CarrierDO> airlines = this.carrierDAO.findByCode( "AV" );
     Assert.assertEquals( 1, airlines.size() );
   }
 
   @Test
   public void testFindByName()
   {
-    List<AirlineDO> airlines = this.airlineDAO.findByName( "Avianca" );
+    List<CarrierDO> airlines = this.carrierDAO.findByName( "Avianca" );
     Assert.assertEquals( 1, airlines.size() );
   }
 
   @Test
   public void testFind()
   {
-    AirlineDO airline = this.airlineDAO.find( 1 );
+    CarrierDO airline = this.carrierDAO.find( 1 );
     Assert.assertNotNull( airline );
   }
 
   @Test
   public void testFindAll()
   {
-    List<AirlineDO> airlines = airlineDAO.findAll();
+    List<CarrierDO> airlines = carrierDAO.findAll();
 
-    for( AirlineDO airline : airlines )
+    for( CarrierDO airline : airlines )
     {
       LOGGER.info( airline );
     }

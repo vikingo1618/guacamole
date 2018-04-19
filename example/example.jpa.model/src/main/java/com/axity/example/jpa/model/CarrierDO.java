@@ -11,35 +11,39 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+/**
+ * Entidad de la tabla C_AEROLINEA
+ * 
+ * @author gsegura
+ */
 @Entity
 @Table(name = "C_AEROLINEA")
-@NamedQueries({ @NamedQuery(name = "AirlineDO.findByCode", query = "SELECT o FROM AirlineDO o WHERE o.code = :code"),
-    @NamedQuery(name = "AirlineDO.findByName", query = "SELECT o FROM AirlineDO o WHERE o.name LIKE :name") })
-public class AirlineDO extends AbstractCatalogEntity<AirlineDO>
+@NamedQueries({ @NamedQuery(name = "CarrierDO.findByCode", query = "SELECT o FROM CarrierDO o WHERE o.code = :code"),
+    @NamedQuery(name = "CarrierDO.findByName", query = "SELECT o FROM CarrierDO o WHERE o.name LIKE :name") })
+public class CarrierDO extends AbstractCatalogEntity<CarrierDO>
 {
-
   /**
    * 
    */
-  private static final long serialVersionUID = -1512732083253337161L;
+  private static final long serialVersionUID = -2300320077270334506L;
   @Id
   @Column(name = "ID_AEROLINEA")
-  private Integer idAirline;
+  private Integer idCarrier;
 
   /**
-   * @return the idAirline
+   * @return the idCarrier
    */
-  public Integer getIdAirline()
+  public Integer getIdCarrier()
   {
-    return idAirline;
+    return idCarrier;
   }
 
   /**
-   * @param idAirline the idAirline to set
+   * @param idCarrier the idCarrier to set
    */
-  public void setIdAirline( Integer idAirline )
+  public void setIdCarrier( Integer idCarrier )
   {
-    this.idAirline = idAirline;
+    this.idCarrier = idCarrier;
   }
 
   /**
@@ -56,8 +60,8 @@ public class AirlineDO extends AbstractCatalogEntity<AirlineDO>
     }
     else if( object != null && object.getClass().equals( this.getClass() ) )
     {
-      AirlineDO that = (AirlineDO) object;
-      isEquals = new EqualsBuilder().append( this.idAirline, that.idAirline ).isEquals();
+      CarrierDO that = (CarrierDO) object;
+      isEquals = new EqualsBuilder().append( this.idCarrier, that.idCarrier ).isEquals();
     }
     return isEquals;
   }
@@ -68,7 +72,7 @@ public class AirlineDO extends AbstractCatalogEntity<AirlineDO>
   @Override
   public int hashCode()
   {
-    return new HashCodeBuilder().append( this.idAirline ).toHashCode();
+    return new HashCodeBuilder().append( this.idCarrier ).toHashCode();
   }
 
   /**
@@ -77,7 +81,7 @@ public class AirlineDO extends AbstractCatalogEntity<AirlineDO>
   @Override
   public String toString()
   {
-    return new ToStringBuilder( this ).append( "idAirline", this.idAirline ).append( "name", this.name )
+    return new ToStringBuilder( this ).append( "idAirline", this.idCarrier ).append( "name", this.name )
         .append( "code", this.code ).toString();
   }
 

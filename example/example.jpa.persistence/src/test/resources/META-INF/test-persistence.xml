@@ -4,7 +4,7 @@
   <persistence-unit name="ExamplePersistenceUnit" transaction-type="RESOURCE_LOCAL">
 
     <jta-data-source>java:ds/Example</jta-data-source>
-    <class>com.axity.example.jpa.model.AirlineDO</class>
+    <class>com.axity.example.jpa.model.CarrierDO</class>
 
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
